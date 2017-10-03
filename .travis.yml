@@ -1,8 +1,12 @@
 language: ruby
+dist: trusty
 rvm:
- - 2.3.1
-# Cache bundler dependencies
-cache: bundler
+ - 2.3.3
+# Cache bundler dependencies and phantomjs binary
+cache:
+  directories:
+    - $PWD/travis-phantomjs21
+    - $PWD/vendor/bundle
 # For testing mongoid integration
 services:
   - mongodb
@@ -10,22 +14,14 @@ services:
 env:
   - ATTACHINARY_ORM=active_record
   - ATTACHINARY_ORM=mongoid
-# Enable headless testing with chrome
-dist: trusty
-addons:
-  chrome: stable
 # Headless test setup
 before_install:
-  - # start your web application and listen on `localhost`
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-  # Install ChromeDriver (64bits).
-  - wget -N http://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip -P ~/
-  - unzip ~/chromedriver_linux64.zip -d ~/
-  - rm ~/chromedriver_linux64.zip
-  - sudo mv -f ~/chromedriver /usr/local/bin
-  - sudo chmod +x /usr/local/bin/chromedriver
+   - mkdir -p travis-phantomjs21
+   - if [ ! -f $PWD/travis-phantomjs21/phantomjs ]; then wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/phantomjs-2.1-linux-x86_64.tar.bz2; tar -xvf $PWD/phantomjs-2.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs21 --strip-components 2 phantomjs-2.1.1-linux-x86_64/bin/phantomjs; fi
+   - chmod +x $PWD/travis-phantomjs21/phantomjs
 # Copy sample credentials to expected path
 before_script:
+  - ${PHANTOMJS:-phantomjs} --version
   - cp spec/support/cloudinary-sample-credentials.yml spec/dummy/config/cloudinary.yml
   - bundle exec rake db:setup
 # Run RSpec

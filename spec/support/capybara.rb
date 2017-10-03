@@ -18,8 +18,10 @@ Capybara.register_driver(:headless_chrome) do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(chromeOptions: {args: %w[headless disable-gpu]})
   Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
 end
+# Add also poltergeist to available javascript drivers
+require 'capybara/poltergeist'
 # Select javascript driver with env variable, using chrome by default
-Capybara.javascript_driver = ENV['JAVASCRIPT_DRIVER'].try(:to_sym) || :headless_chrome
+Capybara.javascript_driver = ENV['JAVASCRIPT_DRIVER'].try(:to_sym) || ENV['TRAVIS'] ? :poltergeist : :headless_chrome
 
 # Keep up to the number of screenshots specified in the hash
 Capybara::Screenshot.prune_strategy = {keep: 5}
