@@ -37,3 +37,14 @@ end
 
 # Configure default task
 task :default => :spec
+
+# Remove cloudinary files created during spec executions
+task cleanup: :environment do
+  begin
+    print "Cleaning up created resources in cloud #{Cloudinary.config.cloud_name}..."
+    Cloudinary::Api.delete_resources_by_tag('test_env')
+    print ' (done)'
+  rescue Cloudinary::Api::RateLimited => e
+    print " (#{e.message})"
+  end
+end
