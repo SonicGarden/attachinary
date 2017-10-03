@@ -19,6 +19,7 @@ before_install:
    - sudo mv $PWD/travis-phantomjs21/phantomjs /usr/local/bin/
 # Copy sample credentials to expected path
 before_script:
+  - which phantomjs
   - ${PHANTOMJS:-phantomjs} --version
   - cp spec/support/cloudinary-sample-credentials.yml spec/dummy/config/cloudinary.yml
   - bundle exec rake db:setup
