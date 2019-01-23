@@ -13,8 +13,6 @@ gem 'jquery-rails'
 gem 'cloudinary'
 gem 'simple_form'
 
-gem 'rails_sortable'
-
 # Assets gems used in dummy application
 gem 'coffee-rails'
 gem 'sass-rails'
