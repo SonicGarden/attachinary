@@ -4,7 +4,6 @@ module Attachinary
     include ::Mongoid::Timestamps
     include Mongoid::Attributes::Dynamic
     include FileMixin
-    include RailsSortable::Model
 
     field :public_id, type: String
     field :version, type: String
@@ -13,7 +12,6 @@ module Attachinary
     field :format, type: String
     field :resource_type, type: String
     field :position, type: Integer
-    field :sort, type: Integer
     
     embedded_in :attachinariable, polymorphic: true
   end
