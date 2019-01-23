@@ -13,7 +13,7 @@ gem 'jquery-rails'
 gem 'cloudinary'
 gem 'simple_form'
 
-gem 'rails_sortable'
+gem 'mongoid_orderable'
 
 # Assets gems used in dummy application
 gem 'coffee-rails'
