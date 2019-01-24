@@ -14,5 +14,13 @@ module Attachinary
     field :position, type: Integer, default: 0
     
     embedded_in :attachinariable, polymorphic: true
+    
+    before_validation :save_position
+    
+    private
+    
+    def save_position
+      self.position = (self._index + 1) if self.new_record?
+    end
   end
 end
