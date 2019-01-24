@@ -3,7 +3,6 @@ module Attachinary
     include ::Mongoid::Document
     include ::Mongoid::Timestamps
     include FileMixin
-    include Mongoid::Orderable
 
     field :public_id, type: String
     field :version, type: String
