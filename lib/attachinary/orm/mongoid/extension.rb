@@ -9,12 +9,14 @@ module Attachinary
         # embeds_on :photo, ...
         embeds_one :"#{options[:scope]}",
           as: :attachinariable,
+          inverse_of: :attachinariable,
           class_name: '::Attachinary::File',
           cascade_callbacks: true
       else
         # embeds_many :images, ...
         embeds_many :"#{options[:scope]}",
           as: :attachinariable,
+          inverse_of: :attachinariable,
           class_name: '::Attachinary::File',
           cascade_callbacks: true
       end
