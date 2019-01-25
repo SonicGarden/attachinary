@@ -25,6 +25,7 @@ module Attachinary
     
     def save_position
       self.position = (self._index + 1) if self.new_record?
+      self.position = (self._index + 1) if self.persisted?
     end
   end
 end
