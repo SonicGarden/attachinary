@@ -11,7 +11,7 @@ module Attachinary
     field :height, type: Integer
     field :format, type: String
     field :resource_type, type: String
-    field :position, type: Integer, default: 0
+    field :position, type: Integer, default: 1
     
     embedded_in :attachinariable, polymorphic: true
     
