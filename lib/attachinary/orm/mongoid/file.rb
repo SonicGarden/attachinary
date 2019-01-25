@@ -17,7 +17,7 @@ module Attachinary
     
     before_validation :save_position
     
-    def self.update_position
+    before_validation(on: :update) do
       self.position = (self.index + 1)
     end
     
