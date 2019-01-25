@@ -17,15 +17,10 @@ module Attachinary
     
     before_validation :save_position
     
-    before_validation(on: :update) do
-      self.position = index + 1
-    end
-    
     private
     
     def save_position
       self.position = (self._index + 1) if self.new_record?
-      self.position = (self._index + 1) if self.persisted?
     end
   end
 end
