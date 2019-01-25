@@ -13,7 +13,7 @@ module Attachinary
     field :resource_type, type: String
     field :position, type: Integer, default: 1
     
-    embedded_in :attachinariable, polymorphic: true
+    embedded_in :attachinariable, polymorphic: true, inverse_of: :attachinariables
     
     before_validation :save_position
     
