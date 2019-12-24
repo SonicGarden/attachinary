@@ -17,7 +17,7 @@ module Attachinary
         options = Attachinary::Utils.process_options(options)
 
         attachinary_orm_definition(options)
-        
+
         # def photo?
         #   photo.present?
         # end
@@ -64,6 +64,11 @@ module Attachinary
       # Helper method to check for rails 5
       def rails5?
         Rails::VERSION::MAJOR == 5
+      end
+
+      # Helper method to check for rails 6
+      def rails6?
+        Rails::VERSION::MAJOR == 6
       end
 
     end
