@@ -76,6 +76,10 @@ module Attachinary
         Rails::VERSION::MAJOR == 7
       end
 
+      # Helper method to check for rails 8
+      def rails8?
+        Rails::VERSION::MAJOR == 8
+      end
     end
   end
 end
