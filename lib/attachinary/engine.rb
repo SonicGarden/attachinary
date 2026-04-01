@@ -11,7 +11,7 @@ module Attachinary
       end
     end
 
-    initializer "attachinary.include_view_helpers" do |app|
+    initializer "attachinary.include_form_builder" do |app|
       ActiveSupport.on_load :action_view do
         ActionView::Helpers::FormBuilder.send(:include, Attachinary::FormBuilder)
       end
